@@ -66,10 +66,3 @@ def convert_file(file_path, upload_directory, file_name_json):
         file_name_json
         ), 'w', encoding='utf8') as outfile:
         json.dump(result, outfile, indent=3, ensure_ascii=False)
-
-
-if __name__ == "__main__":
-    file_path = os.path.join(app.config['TEMP_FOLDER'], 'data_ggggg.xlsm')
-    upload_directory = app.config['UPLOAD_FOLDER']
-    file_name_json = 'data.json'
-    convert_file(file_path, upload_directory, file_name_json)

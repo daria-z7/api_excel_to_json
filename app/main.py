@@ -17,6 +17,19 @@ logging.basicConfig(
     format='%(asctime)s, %(levelname)s, %(message)s, %(name)s',
 )
 
+"""Создать директории."""
+dir_exists =  os.path.exists(app.config['TEMP_FOLDER'])
+if not dir_exists:
+    os.makedirs(app.config['TEMP_FOLDER'])
+dir_exists =  os.path.exists(app.config['UPLOAD_FOLDER'])
+if not dir_exists:
+    os.makedirs(app.config['UPLOAD_FOLDER'])
+dir_exists =  os.path.exists(app.config['ARCHIVE_FOLDER'])
+if not dir_exists:
+    os.makedirs(app.config['ARCHIVE_FOLDER'])
+dir_exists =  os.path.exists(app.config['ARCHIVE_FAIL_FOLDER'])
+if not dir_exists:
+    os.makedirs(app.config['ARCHIVE_FAIL_FOLDER'])
 
 def allowed_file(filename):
     return ('.' in filename and

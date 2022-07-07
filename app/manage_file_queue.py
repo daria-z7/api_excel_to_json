@@ -1,4 +1,4 @@
-from os import listdir, path, replace
+from os import listdir, path, replace, makedirs
 import time
 import logging
 
@@ -16,13 +16,26 @@ logging.basicConfig(
 )
 
 
+"""Создать директории."""
+dir_exists =  path.exists(app.config['TEMP_FOLDER'])
+if not dir_exists:
+    makedirs(app.config['TEMP_FOLDER'])
+dir_exists =  path.exists(app.config['UPLOAD_FOLDER'])
+if not dir_exists:
+    makedirs(app.config['UPLOAD_FOLDER'])
+dir_exists =  path.exists(app.config['ARCHIVE_FOLDER'])
+if not dir_exists:
+    makedirs(app.config['ARCHIVE_FOLDER'])
+dir_exists =  path.exists(app.config['ARCHIVE_FAIL_FOLDER'])
+if not dir_exists:
+    makedirs(app.config['ARCHIVE_FAIL_FOLDER'])
+
+
 def check_folder():
     """Прочитать новые файлы к обработке."""
     while True:
         temp_directory = app.config['TEMP_FOLDER']
-        file_list = [f for f in listdir(temp_directory) if path.isfile(
-            path.join(temp_directory, f)
-            )]
+        file_list = [f for f in listdir(temp_directory) if path.isfile(path.join(temp_directory, f))]
 
         for file_name in file_list:
             logging.info(f'File {file_name} is proccesing')
