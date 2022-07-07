@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from http import HTTPStatus
 
 from app import app
+from make_path import create_dir
 
 
 ALLOWED_EXTENSIONS = set(['xls', 'xlsx', 'xlsm'])
@@ -17,19 +18,9 @@ logging.basicConfig(
     format='%(asctime)s, %(levelname)s, %(message)s, %(name)s',
 )
 
+
 """Создать директории."""
-dir_exists =  os.path.exists(app.config['TEMP_FOLDER'])
-if not dir_exists:
-    os.makedirs(app.config['TEMP_FOLDER'])
-dir_exists =  os.path.exists(app.config['UPLOAD_FOLDER'])
-if not dir_exists:
-    os.makedirs(app.config['UPLOAD_FOLDER'])
-dir_exists =  os.path.exists(app.config['ARCHIVE_FOLDER'])
-if not dir_exists:
-    os.makedirs(app.config['ARCHIVE_FOLDER'])
-dir_exists =  os.path.exists(app.config['ARCHIVE_FAIL_FOLDER'])
-if not dir_exists:
-    os.makedirs(app.config['ARCHIVE_FAIL_FOLDER'])
+create_dir()
 
 def allowed_file(filename):
     return ('.' in filename and
@@ -60,7 +51,7 @@ def upload_file():
     json_name = os.path.splitext(base)[0] + '.json'
     outfile = os.path.join(app.config['UPLOAD_FOLDER'], json_name)
     if os.path.exists(outfile):
-        logging.info('File already exists')
+        logging.info(f'File {json_name} already exists')
         response = jsonify({'message': 'Файл с таким именем уже существует'})
         response.status_code = HTTPStatus.OK
         return response
@@ -83,4 +74,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

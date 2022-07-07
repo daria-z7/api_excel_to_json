@@ -4,32 +4,21 @@ import logging
 
 from app import app
 from conversion import convert_file
+from make_path import create_dir
 
 
-RETRY_TIME = 10
+RETRY_TIME = 100
 
 logging.basicConfig(
     level=logging.INFO,
-    filename='main.log',
+    filename='manage_queue.log',
     filemode='a',
     format='%(asctime)s, %(levelname)s, %(message)s, %(name)s',
 )
 
 
 """Создать директории."""
-dir_exists =  path.exists(app.config['TEMP_FOLDER'])
-if not dir_exists:
-    makedirs(app.config['TEMP_FOLDER'])
-dir_exists =  path.exists(app.config['UPLOAD_FOLDER'])
-if not dir_exists:
-    makedirs(app.config['UPLOAD_FOLDER'])
-dir_exists =  path.exists(app.config['ARCHIVE_FOLDER'])
-if not dir_exists:
-    makedirs(app.config['ARCHIVE_FOLDER'])
-dir_exists =  path.exists(app.config['ARCHIVE_FAIL_FOLDER'])
-if not dir_exists:
-    makedirs(app.config['ARCHIVE_FAIL_FOLDER'])
-
+create_dir()
 
 def check_folder():
     """Прочитать новые файлы к обработке."""
@@ -69,8 +58,8 @@ def check_folder():
                     )
                 replace(temp_file_path, archive_path)
                 logging.error(f'File {file_name} was moved to error folder')
-            finally:
-                time.sleep(RETRY_TIME)
+
+        time.sleep(RETRY_TIME)
 
 
 if __name__ == "__main__":
