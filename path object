@@ -1,0 +1,30 @@
+[
+   {
+      "SER_LOC":530,
+      "ZNS_LOC":1339,
+      "PRS_LOC":1,
+      "DOR_PRIP":76,
+      "DEPO_PRIP":7,
+      "DATE_OP":"2019-09-17T09:35:00Z",
+      "KOD_SOST":535,
+      "KOP_LMD":0,
+      "PROBEG_LIN":0,
+      "PROBEG_USL":0,
+      "VREM_OPER":0,
+      "EXPL_TYPE_CODE":2
+   },
+   {
+      "SER_LOC":530,
+      "ZNS_LOC":1339,
+      "PRS_LOC":2,
+      "DOR_PRIP":76,
+      "DEPO_PRIP":7,
+      "DATE_OP":"2019-09-17T09:35:00Z",
+      "KOD_SOST":535,
+      "KOP_LMD":0,
+      "PROBEG_LIN":0,
+      "PROBEG_USL":0,
+      "VREM_OPER":0,
+      "EXPL_TYPE_CODE":2
+   }
+]
